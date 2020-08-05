@@ -6,6 +6,11 @@ class Creature {
     this.diet = diet;
   }
 
+  /**
+   * Convert inches to feet and inches
+   * @param inches
+   * @returns height object in {feet: number, inches: number}
+   */
   static toFeetAndInches(inches) {
     return {feet: Math.floor(inches / 12), inches: inches % 12};
   }
@@ -31,17 +36,28 @@ class Dino extends Creature {
     this.fact = fact;
   }
 
+  /**
+   * Generate fact using where
+   * @returns {string}
+   */
   getWhereFact() {
     return `The ${this.species} lived in ${this.where}.`;
   }
 
+  /**
+   * Generate fact using when
+   * @returns {string}
+   */
   getWhenFact() {
     return `The ${this.species} lived during ${this.when}.`;
   }
 
-
-  // Create Dino Compare Method 1
-// NOTE: Weight in JSON file is in lbs, height in inches.
+  /**
+   * Dino Compare height with human
+   * NOTE: Weight in JSON file is in lbs, height in inches.
+   * @param creature
+   * @returns a fact {string}
+   */
   compareHeight(creature) {
     if (creature instanceof Human) {
       const diff = this.height - creature.height;
@@ -54,8 +70,12 @@ class Dino extends Creature {
     }
   }
 
-// Create Dino Compare Method 2
-// NOTE: Weight in JSON file is in lbs, height in inches.
+  /**
+   * Dino Compare weight with human
+   * NOTE: Weight in JSON file is in lbs, height in inches.
+   * @param creature
+   * @returns a fact {string}
+   */
   compareWeight(creature) {
     if (creature instanceof Human) {
       const diff = this.weight - creature.weight;
@@ -67,8 +87,12 @@ class Dino extends Creature {
     }
   }
 
-// Create Dino Compare Method 3
-// NOTE: Weight in JSON file is in lbs, height in inches.
+  /**
+   * Dino Compare diet with human
+   * NOTE: Weight in JSON file is in lbs, height in inches.
+   * @param creature
+   * @returns a fact {string}
+   */
   compareDiet(creature) {
     if (creature instanceof Human) {
       if (this.diet === creature.diet) {
@@ -117,7 +141,7 @@ function addHuman() {
         inches: Number(getFormValue('inches'))
       };
       const weight = getFormValue('weight');
-      const diet = getFormValue('diet');
+      const diet = getFormValue('diet').toLowerCase();
       return new Human(name, Creature.toInches(height), weight, diet);
     })();
   creatures.splice(4, 0, human);
@@ -185,7 +209,7 @@ function createTile(creature, human) {
 
   // img - image
   let imageElement = document.createElement('img');
-  imageElement.src = info.image;
+  imageElement.src = info.image.toLowerCase();
   tile.appendChild(imageElement);
 
   return tile;
