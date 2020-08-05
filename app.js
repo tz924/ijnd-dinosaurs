@@ -98,7 +98,6 @@ fetch("dino.json")
       dino.where, dino.when, dino.fact))
   })
   .then(dinos => {
-    const grid = document.getElementById('grid');
     for (const dino of dinos) {
       creatures.push(dino);
     }
